@@ -85,6 +85,7 @@ public class TransactionDineroActivity extends AppCompatActivity implements Tran
         switch (codTransacion){
             case 0:
                 //retirar dinero mandando el codigo del chip
+                //comentario prueba para subir a git
                 break;
             case 1:
                 //depositar dinero mandando el codigo del chip
