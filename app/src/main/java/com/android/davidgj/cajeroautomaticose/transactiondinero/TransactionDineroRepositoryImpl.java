@@ -11,6 +11,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
+
 /**
  * Created by DaviDGJ on 29/3/2017.
  */
@@ -40,7 +42,7 @@ public class TransactionDineroRepositoryImpl implements TransactionDineroReposit
                     Transaction transaction = new Transaction();
                     transaction.setMonto(monto);
                     transaction.setTipo("Retiro");
-
+                    transaction.setDate(new Date());
                     DatabaseReference setReferenceTransaction = firebaseHelper.getUserTransaction(codChip, user.getName());
                     setReferenceTransaction.push().setValue(transaction);
 
@@ -76,6 +78,7 @@ public class TransactionDineroRepositoryImpl implements TransactionDineroReposit
                     referenceSaldoUser.setValue(user);
                     Transaction transaction = new Transaction();
                     transaction.setMonto(monto);
+                transaction.setDate(new Date());
                     transaction.setTipo("Deposito");
 
                     DatabaseReference setReferenceTransaction = firebaseHelper.getUserTransaction(codChip, user.getName());
