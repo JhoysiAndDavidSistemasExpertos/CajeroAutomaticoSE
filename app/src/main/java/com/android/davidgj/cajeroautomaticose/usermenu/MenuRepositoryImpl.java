@@ -54,7 +54,7 @@ public class MenuRepositoryImpl implements MenuRepository{
 
     @Override
     public void seeExtract(int codChip) {
-        DatabaseReference extractoUserReference = firebaseHelper.getUserTransaction(codChip);
+        DatabaseReference extractoUserReference = firebaseHelper.getUserTransaction(codChip, "NamePruebaseeExtract");
         extractoUserReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

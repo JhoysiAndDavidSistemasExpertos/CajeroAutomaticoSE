@@ -20,8 +20,8 @@
         </activity>
         <activity android:name=".codigopin.ui.LoginPinActivity"></activity>
         <activity android:name=".usermenu.ui.MenuActivity"></activity>
-        <activity android:name=".transactiondinero.TransactionDineroActivity"></activity>
-        <activity android:name=".transationsaldo.TransactionSaldo"></activity>
+        <activity android:name=".transactiondinero.ui.TransactionDineroActivity"></activity>
+        <activity android:name=".transationsaldo.TransactionSaldoActivity"></activity>
     </application>
 
 

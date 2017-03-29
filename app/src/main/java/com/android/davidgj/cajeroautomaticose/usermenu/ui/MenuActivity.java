@@ -11,8 +11,8 @@ import com.android.davidgj.cajeroautomaticose.R;
 import com.android.davidgj.cajeroautomaticose.codigochip.ui.LoginChipActivity;
 import com.android.davidgj.cajeroautomaticose.entities.Comunicador;
 import com.android.davidgj.cajeroautomaticose.entities.User;
-import com.android.davidgj.cajeroautomaticose.transactiondinero.TransactionDineroActivity;
-import com.android.davidgj.cajeroautomaticose.transationsaldo.TransactionSaldo;
+import com.android.davidgj.cajeroautomaticose.transactiondinero.ui.TransactionDineroActivity;
+import com.android.davidgj.cajeroautomaticose.transationsaldo.TransactionSaldoActivity;
 import com.android.davidgj.cajeroautomaticose.usermenu.MenuPresenter;
 import com.android.davidgj.cajeroautomaticose.usermenu.MenuPresenterImpl;
 
@@ -103,7 +103,7 @@ public class MenuActivity extends AppCompatActivity implements MenuActivityView{
     }
 
     public void tipoMetodo(User user, int tipo){
-        Intent i = new Intent(this, TransactionSaldo.class);
+        Intent i = new Intent(this, TransactionSaldoActivity.class);
         i.putExtra("tipoMetodo",tipo);
         Log.e("Usuario",user.getName());
         Comunicador.setObjeto(user);

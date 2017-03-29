@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondo"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:id="@+id/view_trnasction_dinero"
+    tools:context=".transactiondinero.ui.TransactionDineroActivity">
+<LinearLayout
+    android:gravity="center"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="30sp"
+        android:text="Ingrese monto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:background="@drawable/et_fondo"
+        android:id="@+id/et_dinero_monto"
+        android:hint="..."
+        android:layout_width="match_parent"
+        android:layout_height="38dp" />
+
+    <Button
+        android:padding="10dp"
+        android:background="@drawable/boton_redondo"
+        android:id="@+id/btn_dinero_enviar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="enviar" />
+
+    <TextView
+        android:textColor="@color/cardview_light_background"
+        android:id="@+id/tv_dinero_message"
+        android:textSize="30sp"
+        android:text="Mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
+    <LinearLayout
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+
+            android:layout_gravity="right"
+            android:padding="10dp"
+            android:background="@drawable/boton_redondo"
+            android:id="@+id/btn_dinero_versaldo"
+            android:text="Ver Saldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_gravity="right"
+            android:padding="10dp"
+            android:background="@drawable/boton_redondo"
+            android:id="@+id/btn_dinero_salir"
+            android:text="Salir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</LinearLayout>

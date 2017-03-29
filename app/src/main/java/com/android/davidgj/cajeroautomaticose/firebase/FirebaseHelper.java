@@ -42,8 +42,9 @@ public class FirebaseHelper {
         return getDatabaseReference().child(USERS_PATH);
     }
     //obttener referencia de las transacions de un user segun su chip
-    public DatabaseReference getUserTransaction(int codChip){
-        String keyTransaction = codChip+String.valueOf(getUserReference(codChip).child("name"));
+    public DatabaseReference getUserTransaction(int codChip, String name){
+        //String keyTransaction = codChip+String.valueOf(getUserReference(codChip).child("name").getKey());
+        String keyTransaction = codChip+name;
 
         return getDatabaseReference().child(TRANSCATIONS_PATH).child(keyTransaction);
     }
