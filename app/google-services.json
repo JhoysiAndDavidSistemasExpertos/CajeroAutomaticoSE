@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "901829768227",
+    "firebase_url": "https://cajero-automatico.firebaseio.com",
+    "project_id": "cajero-automatico",
+    "storage_bucket": "cajero-automatico.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901829768227:android:5bf38310cc1d6c52",
+        "android_client_info": {
+          "package_name": "com.davidgjordan.android.cajeroautomatico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901829768227-pft6mnd1r32lsmcna1dl2d1k7mterdji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9PJJiL-j1wgKmUPkUl74Ccsv5mmzHhdo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901829768227:android:a352fb133fb16597",
+        "android_client_info": {
+          "package_name": "com.android.davidgj.cajeroautomaticose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901829768227-pft6mnd1r32lsmcna1dl2d1k7mterdji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9PJJiL-j1wgKmUPkUl74Ccsv5mmzHhdo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

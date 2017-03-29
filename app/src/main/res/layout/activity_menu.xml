@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@drawable/fondo"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context=".usermenu.ui.MenuActivity">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_menu_retirar_dinero"
+                android:text="Retirar dinero"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/boton_redondo"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_menu_depositar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Depositar dinero"
+            android:background="@drawable/boton_redondo"
+            />
+    </LinearLayout>
+    </LinearLayout>
+
+   <LinearLayout
+       android:layout_weight="1"
+       android:orientation="horizontal"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <LinearLayout
+           android:padding="@dimen/activity_horizontal_margin"
+           android:layout_weight="1"
+           android:orientation="horizontal"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <Button
+               android:layout_weight="1"
+               android:id="@+id/btn_menu_saldo"
+               android:text="Ver saldo"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:background="@drawable/boton_redondo"/>
+
+       </LinearLayout>
+       <LinearLayout
+           android:padding="@dimen/activity_horizontal_margin"
+           android:layout_weight="1"
+           android:orientation="horizontal"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <Button
+               android:layout_weight="1"
+               android:id="@+id/btn_menu_extracto"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:text="Mini extracto"
+               android:background="@drawable/boton_redondo"/>
+       </LinearLayout>
+   </LinearLayout>
+
+
+</LinearLayout>

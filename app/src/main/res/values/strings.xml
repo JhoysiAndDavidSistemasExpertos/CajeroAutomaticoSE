@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Cajero Automatico M.S.C.</string>
+    <string name="login.chip.bienvenido">Bienvenido!</string>
+    <string name="login.chip.ingrese_tarjeta">Ingrese tarjeta Porfavor</string>
+    <string name="loginchip.verificar_tarjeta">Verificar tarjeta</string>
+    <string name="loginpin.tv.ingrese_pin_">Ingrese pin porfavor</string>
+    <string name="loginpin.btn.enviar_pin">Aceptar</string>
+</resources>
