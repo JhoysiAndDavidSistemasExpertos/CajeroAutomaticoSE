@@ -10,31 +10,66 @@
     tools:context=".transationsaldo.TransactionSaldoActivity">
 
     <LinearLayout
-        android:orientation="horizontal"
+
+        android:layout_weight="15"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
             android:textColor="@color/cardview_light_background"
             android:padding="16dp"
             android:id="@+id/tv_transaction_saldo"
-            android:textSize="30sp"
+            android:textSize="23sp"
             android:text="Saldo:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
+        <TextView
+        android:textColor="@color/cardview_light_background"
+        android:textSize="20sp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:text="Ubicacion: MSC--UDABOL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/cardview_light_background"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:text="Tarjeta XXXXXXXXX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="10"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_transaction_saldo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="20"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_saldo_aceptar"
+            android:background="@drawable/boton_redondo"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:gravity="center_vertical"
+            android:text="Aceptar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

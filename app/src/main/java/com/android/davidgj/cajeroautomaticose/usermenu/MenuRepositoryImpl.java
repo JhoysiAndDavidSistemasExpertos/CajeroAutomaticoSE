@@ -14,6 +14,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by DaviDGJ on 27/3/2017.
  */
@@ -22,7 +25,6 @@ public class MenuRepositoryImpl implements MenuRepository{
 
     private EventBusHelper eventBusHelper;
     private FirebaseHelper firebaseHelper;
-    private DatabaseReference reference;
 
     public MenuRepositoryImpl() {
         this.eventBusHelper = GreenRobotEventBusHelperImple.getInstance();
@@ -44,7 +46,7 @@ public class MenuRepositoryImpl implements MenuRepository{
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("seeBalance", "Error");
-                post(MenuEvent.errorTrasation, databaseError.getMessage());
+                postError(MenuEvent.errorTrasation, databaseError.getMessage());
             }
         });
 
@@ -53,32 +55,57 @@ public class MenuRepositoryImpl implements MenuRepository{
 
 
     @Override
-    public void seeExtract(int codChip) {
-        DatabaseReference extractoUserReference = firebaseHelper.getUserTransaction(codChip, "NamePruebaseeExtract");
-        extractoUserReference.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void seeExtract(final int codChip) {
+       final ArrayList<Transaction> listTransaction = new ArrayList<Transaction>();
+
+        DatabaseReference userReference = firebaseHelper.getUserReference(codChip);
+        userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                /*Log.e("DataSna",dataSnapshot.getValue()+"");
-                Transaction userTransaction = dataSnapshot.getValue(Transaction .class);
-                postSeeExtract(MenuEvent.verExxtracto, userTransaction);*/
+                final User user = dataSnapshot.getValue(User.class);
+
+                DatabaseReference refereceExtract = firebaseHelper.getUserTransaction(codChip, user.getName());
+                refereceExtract.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot f: dataSnapshot.getChildren()){
+                            Transaction transaction = f.getValue(Transaction.class);
+                            listTransaction.add(transaction);
+                        }
+                        postSeeExtract(MenuEvent.verExxtracto,user, listTransaction);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        postError(MenuEvent.errorTrasation, databaseError.getMessage());
+
+                    }
+                });
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                post(MenuEvent.errorTrasation, databaseError.getMessage());
+                postError(MenuEvent.errorTrasation, databaseError.getMessage());
+
             }
         });
     }
 
-    private void postSeeExtract(int verExxtracto, Transaction userTransaction) {
-        /*MenuEvent menuEvent = new MenuEvent();
-        menuEvent.setListTransaction(user);
-        menuEvent.setTypeEvent(eventType);
-        eventBusHelper.post(menuEvent);*/
-    }
 
     //-------------------------------------------------------
+
+
+    private void  postSeeExtract(int eventtype, User user, ArrayList<Transaction> transactionList){
+
+        MenuEvent event = new MenuEvent();
+        event.setUser(user);
+        event.setListTransaction(transactionList);
+        event.setTypeEvent(eventtype);
+        eventBusHelper.post(event);
+
+
+    }
     private void postSeeBalance(int eventType, User user) {
         MenuEvent menuEvent = new MenuEvent();
         menuEvent.setUser(user);
@@ -86,7 +113,7 @@ public class MenuRepositoryImpl implements MenuRepository{
         eventBusHelper.post(menuEvent);
     }
 
-    private void post(int eventType, String error){
+    private void postError(int eventType, String error){
         MenuEvent menuEvent = new MenuEvent();
         menuEvent.setTypeEvent(eventType);
         menuEvent.setErrorMessage(error);

@@ -2,6 +2,7 @@ package com.android.davidgj.cajeroautomaticose.usermenu;
 
 
 
+import com.android.davidgj.cajeroautomaticose.entities.Transaction;
 import com.android.davidgj.cajeroautomaticose.entities.User;
 import com.android.davidgj.cajeroautomaticose.lib.EventBusHelper;
 import com.android.davidgj.cajeroautomaticose.lib.GreenRobotEventBusHelperImple;
@@ -9,6 +10,9 @@ import com.android.davidgj.cajeroautomaticose.usermenu.events.MenuEvent;
 import com.android.davidgj.cajeroautomaticose.usermenu.ui.MenuActivityView;
 
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by DaviDGJ on 27/3/2017.
@@ -55,7 +59,7 @@ public class MenuPresenterImpl implements MenuPresenter{
                 verSaldo(event.getUser());
                 break;
             case MenuEvent.verExxtracto:
-                verExxtracto(event.getUser());
+                verExxtracto(event.getUser(), event.getListTransaction());
                 break;
             case MenuEvent.errorTrasation:
                 errorTrasation(event.getErrorMessage());
@@ -65,13 +69,15 @@ public class MenuPresenterImpl implements MenuPresenter{
 
     }
 
+    private void verExxtracto(User user, ArrayList<Transaction> listTransaction) {
+        view.showExtract(user, listTransaction);
+
+    }
+
     private void errorTrasation(String errorMessage) {
         view.setError(errorMessage);
     }
 
-    private void verExxtracto(User user) {
-        view.showExtract(user);
-    }
 
     private void verSaldo(User saldoCuenta) {
 
