@@ -120,8 +120,8 @@ public class MenuActivity extends AppCompatActivity implements MenuActivityView{
 
             Comunicador.setTransactions(transactionList);
 
-            startActivity(i);
         }
+        startActivity(i);
     }
 
     @Override
