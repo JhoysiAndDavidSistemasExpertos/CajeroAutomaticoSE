@@ -5,18 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
 import android.widget.TextView;
 
-
 import com.android.davidgj.cajeroautomaticose.R;
+import com.android.davidgj.cajeroautomaticose.codigochip.ui.LoginChipActivity;
 import com.android.davidgj.cajeroautomaticose.entities.Comunicador;
 import com.android.davidgj.cajeroautomaticose.entities.Transaction;
-import com.android.davidgj.cajeroautomaticose.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TransactionSaldoActivity extends AppCompatActivity {
 
@@ -24,8 +26,11 @@ public class TransactionSaldoActivity extends AppCompatActivity {
     TextView tvTransactionSaldo;
     @BindView(R.id.rv_transaction_saldo)
     RecyclerView rvTransactionSaldo;
+    @BindView(R.id.btn_saldo_aceptar)
+    Button btnSaldoAceptar;
 
     private TransactionExtratAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,15 +44,15 @@ public class TransactionSaldoActivity extends AppCompatActivity {
         switch (tipoMetodo) {
             case 1:
                 //saldo
-                User userSaldo = (User) Comunicador.getObjeto();
-                tvTransactionSaldo.setText("hola " + userSaldo.getName() + " tu saldo es: " + userSaldo.getSaldo());
+
+                tvTransactionSaldo.setText("hola " + tipo.getStringExtra("name") + " tu saldo es: " + tipo.getDoubleExtra("saldo", 0.00));
                 break;
 
             case 2:
                 //extracto
-                User userExtracto = (User) Comunicador.getObjeto();
-
-
+                Comunicador.getTransactions();
+                setupAdapter(Comunicador.getTransactions());
+                setupRecclerView();
 
                 break;
             default:
@@ -57,7 +62,7 @@ public class TransactionSaldoActivity extends AppCompatActivity {
 
     }
 
-    private void setupAdapter(List<Transaction> listTransaction) {
+    private void setupAdapter(ArrayList<Transaction> listTransaction) {
         adapter = new TransactionExtratAdapter(listTransaction);
     }
 
@@ -65,6 +70,11 @@ public class TransactionSaldoActivity extends AppCompatActivity {
     private void setupRecclerView() {
         rvTransactionSaldo.setLayoutManager(new LinearLayoutManager(this));
         rvTransactionSaldo.setAdapter(adapter);
+    }
+
+    @OnClick(R.id.btn_saldo_aceptar)
+    public void handleAceptar(){
+        startActivity(new Intent(this, LoginChipActivity.class));
     }
 
 }

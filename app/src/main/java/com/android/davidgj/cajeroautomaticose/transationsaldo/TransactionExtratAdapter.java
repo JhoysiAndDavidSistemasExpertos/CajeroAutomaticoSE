@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.android.davidgj.cajeroautomaticose.R;
 import com.android.davidgj.cajeroautomaticose.entities.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,9 +24,9 @@ public class TransactionExtratAdapter extends RecyclerView.Adapter<TransactionEx
 
 
 
-    private List<Transaction> listTransaction;
+    private ArrayList<Transaction> listTransaction;
 
-    public TransactionExtratAdapter(List<Transaction> listTransaction) {
+    public TransactionExtratAdapter(ArrayList<Transaction> listTransaction) {
         this.listTransaction = listTransaction;
     }
 
@@ -41,6 +42,7 @@ public class TransactionExtratAdapter extends RecyclerView.Adapter<TransactionEx
         Transaction transaction = listTransaction.get(position);
         holder.tvTipo.setText(transaction.getTipo());
         holder.tvMonto.setText(transaction.getMonto()+"");
+        holder.tvDate.setText(transaction.getDate());
     }
 
     @Override
@@ -53,6 +55,8 @@ public class TransactionExtratAdapter extends RecyclerView.Adapter<TransactionEx
         TextView tvTipo;
         @BindView(R.id.tv_monto)
         TextView tvMonto;
+        @BindView(R.id.tv_date)
+        TextView tvDate;
 
         public ViewHolder(View itemView) {
             super(itemView);

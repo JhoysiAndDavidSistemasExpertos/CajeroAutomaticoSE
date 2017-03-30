@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -39,10 +40,15 @@ public class TransactionDineroRepositoryImpl implements TransactionDineroReposit
                 if(user.getSaldo()>monto){
                     user.setSaldo(user.getSaldo()-monto);
                     referenceSaldoUser.setValue(user);
+
                     Transaction transaction = new Transaction();
                     transaction.setMonto(monto);
                     transaction.setTipo("Retiro");
-                    transaction.setDate(new Date());
+
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MMM d HH:mm a");
+                    String tem = simpleDateFormat.format(new Date());
+
+                    transaction.setDate(tem);
                     DatabaseReference setReferenceTransaction = firebaseHelper.getUserTransaction(codChip, user.getName());
                     setReferenceTransaction.push().setValue(transaction);
 
@@ -52,7 +58,7 @@ public class TransactionDineroRepositoryImpl implements TransactionDineroReposit
 
                 }else {
                     //posteamos saldo insufuciente
-                    postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, "Error Intente mas tarde porfavor");
+                    postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, "Saldo insuficiente");
 
                 }
             }
@@ -78,7 +84,9 @@ public class TransactionDineroRepositoryImpl implements TransactionDineroReposit
                     referenceSaldoUser.setValue(user);
                     Transaction transaction = new Transaction();
                     transaction.setMonto(monto);
-                transaction.setDate(new Date());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MMM d HH:mm a");
+                String tem = simpleDateFormat.format(new Date());
+                transaction.setDate(tem);
                     transaction.setTipo("Deposito");
 
                     DatabaseReference setReferenceTransaction = firebaseHelper.getUserTransaction(codChip, user.getName());

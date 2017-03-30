@@ -2,19 +2,24 @@ package com.android.davidgj.cajeroautomaticose.usermenu.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.android.davidgj.cajeroautomaticose.R;
 import com.android.davidgj.cajeroautomaticose.codigochip.ui.LoginChipActivity;
 import com.android.davidgj.cajeroautomaticose.entities.Comunicador;
+import com.android.davidgj.cajeroautomaticose.entities.Transaction;
 import com.android.davidgj.cajeroautomaticose.entities.User;
 import com.android.davidgj.cajeroautomaticose.transactiondinero.ui.TransactionDineroActivity;
 import com.android.davidgj.cajeroautomaticose.transationsaldo.TransactionSaldoActivity;
 import com.android.davidgj.cajeroautomaticose.usermenu.MenuPresenter;
 import com.android.davidgj.cajeroautomaticose.usermenu.MenuPresenterImpl;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,23 +97,33 @@ public class MenuActivity extends AppCompatActivity implements MenuActivityView{
     @Override
     public void showBalance(User userSaldo) {
         //mandar a ontra actividad y en un intent el saldo para q muestre
-        tipoMetodo(userSaldo,1);
+        tipoMetodo(userSaldo,1,new ArrayList<Transaction>());
     }
 
     @Override
-    public void showExtract(User extractUser) {
+    public void showExtract(User extractUser, ArrayList<Transaction> arrayList) {
 //mandar a ontra actividad y en un intent la lista de extracto para q muestre
-        tipoMetodo(extractUser,2);
+//        Log.e("Click showExtract", arrayList.get(0).getDate());
+        tipoMetodo(extractUser,2, arrayList);
 
     }
 
-    public void tipoMetodo(User user, int tipo){
+    public void tipoMetodo(User user, int tipo, ArrayList<Transaction> transactionList) {
         Intent i = new Intent(this, TransactionSaldoActivity.class);
-        i.putExtra("tipoMetodo",tipo);
-        Log.e("Usuario",user.getName());
-        Comunicador.setObjeto(user);
+
+        i.putExtra("tipoMetodo", tipo);
+        i.putExtra("name", user.getName());
+        i.putExtra("saldo", user.getSaldo());
+
+        if (tipo == 2) {
+
+
+            Comunicador.setTransactions(transactionList);
+
+        }
         startActivity(i);
     }
+
     @Override
     public void setError(String errorMessage) {
         //implementar en el menu en un text view

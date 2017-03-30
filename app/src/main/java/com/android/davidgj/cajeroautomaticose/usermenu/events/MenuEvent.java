@@ -4,6 +4,7 @@ package com.android.davidgj.cajeroautomaticose.usermenu.events;
 import com.android.davidgj.cajeroautomaticose.entities.Transaction;
 import com.android.davidgj.cajeroautomaticose.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,13 +20,13 @@ public class MenuEvent {
 
     public User user;
 
-    public List<Transaction> listTransaction;
+    public ArrayList<Transaction> listTransaction;
 
-    public List<Transaction> getListTransaction() {
+    public ArrayList<Transaction> getListTransaction() {
         return listTransaction;
     }
 
-    public void setListTransaction(List<Transaction> listTransaction) {
+    public void setListTransaction(ArrayList<Transaction> listTransaction) {
         this.listTransaction = listTransaction;
     }
 

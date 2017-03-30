@@ -15,15 +15,14 @@ public class Transaction {
     private String tipo;
     private double monto;
 
-    private Date date;
+    private String date;
 
     public String getDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MMM d HH:mm a");
-        String tem = simpleDateFormat.format(date);
-        return tem;
+
+        return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
