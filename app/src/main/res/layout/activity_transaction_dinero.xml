@@ -16,6 +16,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:padding="@dimen/activity_horizontal_margin"
         android:textStyle="bold"
         android:gravity="center"
         android:textColor="@color/cardview_light_background"
@@ -27,6 +28,7 @@
         android:background="@drawable/et_fondo"
         android:id="@+id/et_dinero_monto"
         android:hint="..."
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="38dp" />
 
@@ -40,7 +42,14 @@
 
     <TextView
         android:textColor="@color/cardview_light_background"
-        android:id="@+id/tv_dinero_message"
+        android:id="@+id/tv_dinero_message_name"
+        android:textSize="30sp"
+        android:text="Mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/cardview_light_background"
+        android:id="@+id/tv_dinero_message_saldo"
         android:textSize="30sp"
         android:text="Mensaje"
         android:layout_width="match_parent"

@@ -45,11 +45,12 @@ public class TransactionSaldoActivity extends AppCompatActivity {
             case 1:
                 //saldo
 
-                tvTransactionSaldo.setText("hola " + tipo.getStringExtra("name") + " tu saldo es: " + tipo.getDoubleExtra("saldo", 0.00));
+                tvTransactionSaldo.setText("Usuario:  " + tipo.getStringExtra("name") + " Saldo: " + tipo.getDoubleExtra("saldo", 0.00));
                 break;
 
             case 2:
                 //extracto
+                tvTransactionSaldo.setText("Usuario:  " + tipo.getStringExtra("name") + " Saldo: " + tipo.getDoubleExtra("saldo", 0.00));
                 Comunicador.getTransactions();
                 setupAdapter(Comunicador.getTransactions());
                 setupRecclerView();
@@ -75,6 +76,12 @@ public class TransactionSaldoActivity extends AppCompatActivity {
     @OnClick(R.id.btn_saldo_aceptar)
     public void handleAceptar(){
         startActivity(new Intent(this, LoginChipActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, LoginChipActivity.class);
+        startActivity(intent);
     }
 
 }

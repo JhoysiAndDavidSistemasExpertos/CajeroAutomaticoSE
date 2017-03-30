@@ -117,5 +117,11 @@ public class LoginChipActivity extends AppCompatActivity implements LoginChipAct
         loginChipBtnCodchip.setEnabled(b);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, LoginChipActivity.class);
+        startActivity(intent);
+    }
+
 
 }

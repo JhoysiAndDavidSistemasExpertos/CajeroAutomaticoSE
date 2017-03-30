@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.davidgj.cajeroautomaticose.R;
 import com.android.davidgj.cajeroautomaticose.codigochip.ui.LoginChipActivity;
@@ -29,8 +30,10 @@ public class TransactionDineroActivity extends AppCompatActivity implements Tran
     EditText etDineroMonto;
     @BindView(R.id.btn_dinero_enviar)
     Button btnDineroEnviar;
-    @BindView(R.id.tv_dinero_message)
-    TextView tvDineroMessage;
+    @BindView(R.id.tv_dinero_message_name)
+    TextView tvDineroMessageName;
+    @BindView(R.id.tv_dinero_message_saldo)
+    TextView tvDineroMessageSaldo;
     @BindView(R.id.btn_dinero_versaldo)
     Button btnDineroVersaldo;
     @BindView(R.id.btn_dinero_salir)
@@ -49,7 +52,8 @@ public class TransactionDineroActivity extends AppCompatActivity implements Tran
         btnDineroSalir.setEnabled(false);
         btnDineroVersaldo.setVisibility(View.INVISIBLE);
         btnDineroSalir.setVisibility(View.INVISIBLE);
-        tvDineroMessage.setVisibility(View.GONE);
+        tvDineroMessageName.setVisibility(View.GONE);
+        tvDineroMessageSaldo.setVisibility(View.GONE);
         this.presenter = new TransactionDineroPresenterImpl(this);
         presenter.onCreate();
     }
@@ -76,13 +80,15 @@ public class TransactionDineroActivity extends AppCompatActivity implements Tran
 
     @Override
     public void showMessage(String message) {
-        tvDineroMessage.setVisibility(View.VISIBLE);
-        tvDineroMessage.setText(message);
+        tvDineroMessageName.setVisibility(View.VISIBLE);
+        tvDineroMessageName.setText(message);
     }
 
     @Override
     public void hideMessage() {
-        tvDineroMessage.setVisibility(View.GONE);
+
+        tvDineroMessageName.setVisibility(View.GONE);
+        tvDineroMessageSaldo.setVisibility(View.GONE);
     }
 
     @Override
@@ -112,7 +118,9 @@ public class TransactionDineroActivity extends AppCompatActivity implements Tran
         //intent.putExtra("tipometodo",1);
        // startActivity(intent);
 
-        tvDineroMessage.setText(user.getName()+"---"+user.getSaldo());
+        tvDineroMessageName.setText("Usuario: " + user.getName());
+        tvDineroMessageSaldo.setVisibility(View.VISIBLE);
+        tvDineroMessageSaldo.setText("Saldo: "+user.getSaldo());
     }
     @OnClick(R.id.btn_dinero_salir)
     @Override
@@ -150,6 +158,15 @@ public class TransactionDineroActivity extends AppCompatActivity implements Tran
         } else {
             Snackbar.make(viewTrnasctionDinero,"Ingrese un monto porfavor",Snackbar.LENGTH_SHORT).show();
         }
+
     }
     //--------------------------------------------------------
+
+
+
+    @Override
+    public void onBackPressed() {
+       Intent intent = new Intent(this, LoginChipActivity.class);
+        startActivity(intent);
+    }
 }

@@ -67,7 +67,11 @@ public class MenuActivity extends AppCompatActivity implements MenuActivityView{
         enviarChip.putExtra(LoginChipActivity.CHIP_KEY,intent.getIntExtra(LoginChipActivity.CHIP_KEY,000));
         enviarChip.putExtra(KEY_TRANSACTION, 0);
         startActivity(enviarChip);
+        disableBtnTransactionSaldo();
+        btnMenuDepositar.setEnabled(false);
     }
+
+
 
     @OnClick(R.id.btn_menu_depositar)
     @Override
@@ -75,7 +79,10 @@ public class MenuActivity extends AppCompatActivity implements MenuActivityView{
         Intent enviarChip = new Intent(this, TransactionDineroActivity.class);
         enviarChip.putExtra(LoginChipActivity.CHIP_KEY,intent.getIntExtra(LoginChipActivity.CHIP_KEY,000));
         enviarChip.putExtra(KEY_TRANSACTION, 1);
-        startActivity(enviarChip);    }
+        startActivity(enviarChip);
+        disableBtnTransactionSaldo();
+        btnMenuRetirarDinero.setEnabled(false);
+    }
 
     @OnClick(R.id.btn_menu_saldo)
     @Override
@@ -84,6 +91,8 @@ public class MenuActivity extends AppCompatActivity implements MenuActivityView{
         Intent i = getIntent();
         int codChip = i.getIntExtra(LoginChipActivity.CHIP_KEY,000);
         presenter.seeBalance(codChip);
+        disableBtnTransactionDinero();
+        btnMenuExtracto.setEnabled(false);
     }
 
     @OnClick(R.id.btn_menu_extracto)
@@ -92,6 +101,8 @@ public class MenuActivity extends AppCompatActivity implements MenuActivityView{
         Intent i = getIntent();
         int codChip = i.getIntExtra(LoginChipActivity.CHIP_KEY,000);
         presenter.seeExtract(codChip);
+        disableBtnTransactionDinero();
+        btnMenuSaldo.setEnabled(false);
     }
 
     @Override
@@ -127,6 +138,21 @@ public class MenuActivity extends AppCompatActivity implements MenuActivityView{
     @Override
     public void setError(String errorMessage) {
         //implementar en el menu en un text view
+    }
+    private void disableBtnTransactionSaldo() {
+        btnMenuExtracto.setEnabled(false);
+        btnMenuSaldo.setEnabled(false);
+
+    }
+    private void disableBtnTransactionDinero() {
+        btnMenuDepositar.setEnabled(false);
+        btnMenuRetirarDinero.setEnabled(false);
+
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 
 }
