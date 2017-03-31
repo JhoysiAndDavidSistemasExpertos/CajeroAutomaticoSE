@@ -1,13 +1,15 @@
+
 package com.android.davidgj.cajeroautomaticose.codigopin.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.android.davidgj.cajeroautomaticose.R;
@@ -28,11 +30,24 @@ public class LoginPinActivity extends AppCompatActivity implements LoginPinActiv
     Button loginPinBtnCodpin;
     @BindView(R.id.loginpin_tv_loadingtext)
     TextView loginpinTvLoadingtext;
+    @BindView(R.id.content_pin)
+    View viewContentPin;
 
+    //public int pruebaCOdChip = 111;
     Intent traerhip;
     private LoginPinPresenter loginPinPresenter;
 
-    public static int intentosFallidos = 0;
+    public static int intentosFallidos;
+
+
+    private static class IntentosSigleton{
+        public static  int  INSTANCE = 0;
+    }
+
+    public static int getInstance(){
+        return IntentosSigleton.INSTANCE;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,22 +104,24 @@ public class LoginPinActivity extends AppCompatActivity implements LoginPinActiv
             loginPinPresenter.validateCodPinAndCodChip(Integer.parseInt(codPinStr)
                     , traerhip.getIntExtra(LoginChipActivity.CHIP_KEY, 000));
         }else if(codPinStr.isEmpty()){
-            Toast.makeText(this, "Ingrese Pin porfavor", Toast.LENGTH_LONG).show();
+            Snackbar.make(viewContentPin,"Ingrese Pin porfavor",Snackbar.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void setcodPinError(String error) {
         intentosFallidos++;
-        if(intentosFallidos<=3){
+        if(intentosFallidos<=9){
+            Log.e("intentosFallidos: ",intentosFallidos+"");
             setTextLoading(View.VISIBLE);
             loginpinTvLoadingtext.setText(error);
             loginPinEtCodpin.setText("");
         }else {
-            intentosFallidos=0;
+            intentosFallidos = 0;
+            Log.e("elseintentosFallidos: ",intentosFallidos+"");
+
             startActivity(new Intent(this, LoginChipActivity.class));
         }
-
     }
 
     private void setTextLoading(int visible) {
@@ -115,3 +132,4 @@ public class LoginPinActivity extends AppCompatActivity implements LoginPinActiv
         loginPinEtCodpin.setEnabled(enable);
     }
 }
+
