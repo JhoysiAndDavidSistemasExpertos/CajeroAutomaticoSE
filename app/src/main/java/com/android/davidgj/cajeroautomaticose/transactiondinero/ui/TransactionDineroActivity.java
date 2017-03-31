@@ -113,11 +113,6 @@ public class TransactionDineroActivity extends AppCompatActivity implements Tran
 
         //FALTA VER SI MUESTRA EL SALDO O TENDREMOS Q MANDARLE UN CODIGO DEL CHIP PARA Q MUESTRE
         User user = (User) Comunicador.getObjeto();
-        //Intent intent = new Intent(this, TransactionSaldoActivity.class);
-        //intent.putExtra("llavesaldo",user.getSaldo());
-        //intent.putExtra("tipometodo",1);
-       // startActivity(intent);
-
         tvDineroMessageName.setText("Usuario: " + user.getName());
         tvDineroMessageSaldo.setVisibility(View.VISIBLE);
         tvDineroMessageSaldo.setText("Saldo: "+user.getSaldo());

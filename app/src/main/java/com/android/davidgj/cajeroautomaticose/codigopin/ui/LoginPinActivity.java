@@ -42,11 +42,17 @@ public class LoginPinActivity extends AppCompatActivity implements LoginPinActiv
 
     private static class IntentosSigleton{
         public static  int  INSTANCE = 0;
+
+        public static int getInstance(){
+            return IntentosSigleton.INSTANCE++;
+        }
+        public static int setInstance(){
+            INSTANCE=0;
+            return INSTANCE;
+        }
     }
 
-    public static int getInstance(){
-        return IntentosSigleton.INSTANCE;
-    }
+
 
 
     @Override
@@ -110,15 +116,15 @@ public class LoginPinActivity extends AppCompatActivity implements LoginPinActiv
 
     @Override
     public void setcodPinError(String error) {
-        intentosFallidos++;
-        if(intentosFallidos<=9){
-            Log.e("intentosFallidos: ",intentosFallidos+"");
+        if(IntentosSigleton.getInstance()<=3){
+            IntentosSigleton.getInstance();
+            Log.e("intentosFallidos: ", IntentosSigleton.getInstance() +"");
             setTextLoading(View.VISIBLE);
             loginpinTvLoadingtext.setText(error);
             loginPinEtCodpin.setText("");
         }else {
-            intentosFallidos = 0;
-            Log.e("elseintentosFallidos: ",intentosFallidos+"");
+            IntentosSigleton.setInstance();
+            Log.e("intentosFallidos: ", IntentosSigleton.setInstance() +"");
 
             startActivity(new Intent(this, LoginChipActivity.class));
         }

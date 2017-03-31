@@ -1,5 +1,7 @@
 package com.android.davidgj.cajeroautomaticose.transactiondinero;
 
+import android.util.Log;
+
 import com.android.davidgj.cajeroautomaticose.entities.Transaction;
 import com.android.davidgj.cajeroautomaticose.entities.User;
 import com.android.davidgj.cajeroautomaticose.firebase.FirebaseHelper;
@@ -37,35 +39,56 @@ public class TransactionDineroRepositoryImpl implements TransactionDineroReposit
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                if(user.getSaldo()>monto){
-                    user.setSaldo(user.getSaldo()-monto);
-                    referenceSaldoUser.setValue(user);
+                Log.e("TipoUser", user.getTipoUser());
 
-                    Transaction transaction = new Transaction();
-                    transaction.setMonto(monto);
-                    transaction.setTipo("Retiro");
+                if(user.getTipoUser().equalsIgnoreCase("debito")){
+                    if(user.getSaldo()>monto){
+                        user.setSaldo(user.getSaldo()-monto);
+                        referenceSaldoUser.setValue(user);
+                        Transaction transaction = new Transaction();
+                        transaction.setMonto(monto);
+                        transaction.setTipo("Retiro");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MMM d HH:mm a");
+                        String tem = simpleDateFormat.format(new Date());
+                        transaction.setDate(tem);
+                        DatabaseReference setReferenceTransaction = firebaseHelper.getUserTransaction(codChip, user.getName());
+                        setReferenceTransaction.push().setValue(transaction);
+                        postTransactionMoneySuccsess(TransactinDineroEvent.TRANSACTION_SUCCESS, user);
 
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MMM d HH:mm a");
-                    String tem = simpleDateFormat.format(new Date());
+                    }else {
+                        //posteamos saldo insufuciente
+                        postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, "Saldo insuficiente",user);
 
-                    transaction.setDate(tem);
-                    DatabaseReference setReferenceTransaction = firebaseHelper.getUserTransaction(codChip, user.getName());
-                    setReferenceTransaction.push().setValue(transaction);
+                    }
+                }else if(user.getTipoUser().equalsIgnoreCase("credito")){
 
+                    if(user.getSaldo()>-30000&&monto<=user.getSaldo()+30000){
+                        user.setSaldo(user.getSaldo()-monto);
+                        referenceSaldoUser.setValue(user);
+                        Transaction transaction = new Transaction();
+                        transaction.setMonto(monto);
+                        transaction.setTipo("Retiro");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MMM d HH:mm a");
+                        String tem = simpleDateFormat.format(new Date());
+                        transaction.setDate(tem);
+                        DatabaseReference setReferenceTransaction = firebaseHelper.getUserTransaction(codChip, user.getName());
+                        setReferenceTransaction.push().setValue(transaction);
+                        postTransactionMoneySuccsess(TransactinDineroEvent.TRANSACTION_SUCCESS, user);
 
-                    postTransactionMoneySuccsess(TransactinDineroEvent.TRANSACTION_SUCCESS, user);
-
-
+                    }else {
+                        //posteamos saldo insufuciente
+                        postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, "Saldo insuficiente",user);
+                    }
                 }else {
-                    //posteamos saldo insufuciente
-                    postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, "Saldo insuficiente");
-
+                    postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, "Error en el servidor intente mas tarde",user);
                 }
+
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, databaseError.getMessage());
+                postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, databaseError.getMessage(), null);
 
             }
         });
@@ -100,18 +123,21 @@ public class TransactionDineroRepositoryImpl implements TransactionDineroReposit
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, databaseError.getMessage());
+                postTransactionMoneyError(TransactinDineroEvent.TRANSACTION_ERROR, databaseError.getMessage(),null);
 
             }
         });
 
     }
 //---------------------------------------------------------------------------
-    private void postTransactionMoneyError(int eventType, String errorTransaction) {
+    private void postTransactionMoneyError(int eventType, String errorTransaction, User user) {
 
         TransactinDineroEvent eventTransaction = new TransactinDineroEvent();
         eventTransaction.setEventType(eventType);
         eventTransaction.setErrorMessage(errorTransaction);
+        if(user!=null){
+            eventTransaction.setUser(user);
+        }
         eventBusHelper.post(eventTransaction);
     }
 

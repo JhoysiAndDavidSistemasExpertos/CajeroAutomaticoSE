@@ -125,6 +125,7 @@ public class MenuActivity extends AppCompatActivity implements MenuActivityView{
         i.putExtra("tipoMetodo", tipo);
         i.putExtra("name", user.getName());
         i.putExtra("saldo", user.getSaldo());
+        i.putExtra("tipouser", user.getTipoUser());
 
         if (tipo == 2) {
 

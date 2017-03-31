@@ -14,7 +14,6 @@ import com.android.davidgj.cajeroautomaticose.entities.Comunicador;
 import com.android.davidgj.cajeroautomaticose.entities.Transaction;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +27,8 @@ public class TransactionSaldoActivity extends AppCompatActivity {
     RecyclerView rvTransactionSaldo;
     @BindView(R.id.btn_saldo_aceptar)
     Button btnSaldoAceptar;
+    @BindView(R.id.tv_transaction_tipouser)
+    TextView tvTransactionTipouser;
 
     private TransactionExtratAdapter adapter;
 
@@ -46,11 +47,13 @@ public class TransactionSaldoActivity extends AppCompatActivity {
                 //saldo
 
                 tvTransactionSaldo.setText("Usuario:  " + tipo.getStringExtra("name") + " Saldo: " + tipo.getDoubleExtra("saldo", 0.00));
+                tvTransactionTipouser.setText("Tipo Usuario: "+tipo.getStringExtra("tipouser"));
                 break;
 
             case 2:
                 //extracto
                 tvTransactionSaldo.setText("Usuario:  " + tipo.getStringExtra("name") + " Saldo: " + tipo.getDoubleExtra("saldo", 0.00));
+                tvTransactionTipouser.setText("Tipo Usuario: "+tipo.getStringExtra("tipouser"));
                 Comunicador.getTransactions();
                 setupAdapter(Comunicador.getTransactions());
                 setupRecclerView();
@@ -74,7 +77,7 @@ public class TransactionSaldoActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_saldo_aceptar)
-    public void handleAceptar(){
+    public void handleAceptar() {
         startActivity(new Intent(this, LoginChipActivity.class));
     }
 

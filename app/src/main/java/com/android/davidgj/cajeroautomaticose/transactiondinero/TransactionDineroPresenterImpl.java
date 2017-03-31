@@ -53,17 +53,19 @@ public class TransactionDineroPresenterImpl implements TransactionDineroPresente
                 transactionSucces(event.getUser());
                 break;
             case TransactinDineroEvent.TRANSACTION_ERROR:
-                transactionError(event.getErrorMessage());
+                transactionError(event.getErrorMessage(), event.getUser());
                 break;
 
         }
     }
 
-    private void transactionError(String errorMessage) {
+    private void transactionError(String errorMessage,User user) {
 
         view.showMessage(errorMessage);
         view.disableViewsIngresarMonto();
         view.enableBtnSaldoAndSalir();
+        Comunicador.setObjeto(user);
+
     }
 
     private void transactionSucces(User user) {

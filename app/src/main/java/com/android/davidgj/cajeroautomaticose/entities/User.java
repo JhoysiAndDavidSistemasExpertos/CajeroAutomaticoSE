@@ -14,9 +14,21 @@ public class User {
     private int codPin;
     private double saldo;
 
+    private String tipoUser;
+
+
+
+
     public User() {
     }
 
+    public String getTipoUser() {
+        return tipoUser;
+    }
+
+    public void setTipoUser(String tipoUser) {
+        this.tipoUser = tipoUser;
+    }
 
     public double getSaldo() {
         return saldo;

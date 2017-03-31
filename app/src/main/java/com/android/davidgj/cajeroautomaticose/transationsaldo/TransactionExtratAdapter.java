@@ -26,6 +26,7 @@ public class TransactionExtratAdapter extends RecyclerView.Adapter<TransactionEx
 
     private ArrayList<Transaction> listTransaction;
 
+
     public TransactionExtratAdapter(ArrayList<Transaction> listTransaction) {
         this.listTransaction = listTransaction;
     }

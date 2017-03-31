@@ -32,10 +32,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
         <TextView
+        android:textColor="@color/cardview_light_background"
+        android:padding="16dp"
+        android:textSize="20sp"
+        android:text="Tarjeta XXXXXXXXX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+        <TextView
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:id="@+id/tv_transaction_tipouser"
             android:textColor="@color/cardview_light_background"
-            android:padding="16dp"
             android:textSize="20sp"
-            android:text="Tarjeta XXXXXXXXX"
+            android:text="Tipo Usuario:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -50,7 +59,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_transaction_saldo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
