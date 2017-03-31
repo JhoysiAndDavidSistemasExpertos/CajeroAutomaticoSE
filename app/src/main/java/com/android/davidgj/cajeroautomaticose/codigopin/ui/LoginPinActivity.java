@@ -29,9 +29,10 @@ public class LoginPinActivity extends AppCompatActivity implements LoginPinActiv
     @BindView(R.id.loginpin_tv_loadingtext)
     TextView loginpinTvLoadingtext;
 
-    //public int pruebaCOdChip = 111;
     Intent traerhip;
     private LoginPinPresenter loginPinPresenter;
+
+    public static int intentosFallidos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,9 +95,16 @@ public class LoginPinActivity extends AppCompatActivity implements LoginPinActiv
 
     @Override
     public void setcodPinError(String error) {
-        setTextLoading(View.VISIBLE);
-        loginpinTvLoadingtext.setText(error);
-        loginPinEtCodpin.setText("");
+        intentosFallidos++;
+        if(intentosFallidos<=3){
+            setTextLoading(View.VISIBLE);
+            loginpinTvLoadingtext.setText(error);
+            loginPinEtCodpin.setText("");
+        }else {
+            intentosFallidos=0;
+            startActivity(new Intent(this, LoginChipActivity.class));
+        }
+
     }
 
     private void setTextLoading(int visible) {
